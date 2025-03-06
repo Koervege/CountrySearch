@@ -1,4 +1,4 @@
-package com.carce.countrysearch.model.dto
+package com.carce.countrysearch.model
 
 import com.google.gson.annotations.SerializedName
 

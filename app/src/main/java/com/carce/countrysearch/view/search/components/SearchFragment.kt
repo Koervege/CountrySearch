@@ -1,11 +1,10 @@
-package com.carce.countrysearch.view
+package com.carce.countrysearch.view.search.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +13,6 @@ import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.carce.countrysearch.R
-import com.carce.countrysearch.view.components.CountrySearch
 import com.carce.countrysearch.viewmodel.CountryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +34,7 @@ class SearchFragment : Fragment() {
 
         rootView.findViewById<ComposeView>(R.id.search_compose_view).apply {
             setContent {
-                CountrySearch(getString(R.string.search_results_title), Modifier, viewModel)
+                CountrySearch(getString(R.string.search_results_title), viewModel)
             }
         }
         beginCollectingFromVM()

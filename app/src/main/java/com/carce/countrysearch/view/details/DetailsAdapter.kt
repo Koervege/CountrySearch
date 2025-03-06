@@ -1,16 +1,12 @@
-package com.carce.countrysearch.view
+package com.carce.countrysearch.view.details
 
-import android.text.format.Formatter
-import android.text.method.TextKeyListener.Capitalize
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.carce.countrysearch.R
 import com.carce.countrysearch.databinding.DetailsListItemBinding
-import com.carce.countrysearch.model.dto.Country
-import com.carce.countrysearch.view.DetailsAdapter
+import com.carce.countrysearch.model.Country
 import java.text.NumberFormat
 import java.util.Locale
 

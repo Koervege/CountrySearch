@@ -3,7 +3,7 @@ package com.carce.countrysearch.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import com.carce.countrysearch.networkService.RequestState
 import com.carce.countrysearch.repository.CountryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

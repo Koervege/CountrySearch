@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view.components
+package com.carce.countrysearch.view.search.components
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

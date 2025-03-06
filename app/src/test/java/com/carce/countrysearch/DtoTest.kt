@@ -1,11 +1,9 @@
 package com.carce.countrysearch
 
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.junit.Test
-import org.junit.Assert.*
-import java.io.File
 
 class DtoTest {
 

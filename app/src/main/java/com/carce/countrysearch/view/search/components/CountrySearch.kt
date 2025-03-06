@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view.components
+package com.carce.countrysearch.view.search.components
 
 
 import androidx.compose.foundation.layout.*
@@ -14,24 +14,23 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import com.carce.countrysearch.viewmodel.CountryViewModel
 
 @Composable
 fun CountrySearch(
     title: String,
-    modifier: Modifier = Modifier,
     viewModel: CountryViewModel
 ) {
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val localFocusManager = LocalFocusManager.current
 
-    CompactLayoutWithScaffold(
+    CustomColumn(
         title = {
             TitleText(
                 title = title,
-                modifier = modifier.padding(top = 35.dp, bottom = 20.dp)
+                modifier = Modifier.padding(top = 35.dp, bottom = 20.dp)
             )
         },
         mainContent = {
@@ -117,33 +116,5 @@ fun ShowCountries(
                 trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
         }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CompactLayoutWithScaffold(
-    title: @Composable () -> Unit,
-    mainContent: @Composable () -> Unit,
-    appScaffoldPaddingValues: PaddingValues = PaddingValues(),
-) {
-
-    val sidePadding = 16.dp
-    val columnPadding = PaddingValues(
-        bottom = appScaffoldPaddingValues.calculateBottomPadding(),
-        start = sidePadding,
-        end = sidePadding
-    )
-
-    val columnModifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(columnPadding)
-
-    Column(
-        modifier = columnModifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        title()
-        mainContent()
     }
 }

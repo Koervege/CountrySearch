@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view.components
+package com.carce.countrysearch.view.search.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 
 @Composable
 fun CountryListItem(

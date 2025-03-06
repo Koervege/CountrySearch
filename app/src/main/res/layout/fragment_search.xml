@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SearchFragment">
+    tools:context=".view.search.components.SearchFragment">
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/search_compose_view"

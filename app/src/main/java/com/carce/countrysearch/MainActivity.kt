@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view
+package com.carce.countrysearch
 
 import android.os.Bundle
 import androidx.activity.SystemBarStyle
@@ -6,7 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import com.carce.countrysearch.R
 import com.carce.countrysearch.databinding.ActivityMainBinding
 import com.carce.countrysearch.viewmodel.CountryViewModel
 import dagger.hilt.android.AndroidEntryPoint

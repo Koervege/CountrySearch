@@ -1,6 +1,6 @@
 package com.carce.countrysearch.networkService
 
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import retrofit2.http.GET
 import retrofit2.http.Path
 

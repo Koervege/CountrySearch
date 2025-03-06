@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view
+package com.carce.countrysearch.view.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,20 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import coil3.load
 import com.carce.countrysearch.R
 import com.carce.countrysearch.databinding.FragmentDetailBinding
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import com.carce.countrysearch.viewmodel.CountryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class DetailsFragment : Fragment() {
 

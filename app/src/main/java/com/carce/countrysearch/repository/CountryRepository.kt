@@ -1,6 +1,6 @@
 package com.carce.countrysearch.repository
 
-import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.model.Country
 import com.carce.countrysearch.networkService.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
