@@ -1,7 +1,17 @@
 package com.carce.countrysearch
 
-object JsonHolder {
-    const val countryExampleJson =
+import com.carce.countrysearch.model.Country
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+object TestUtils {
+
+    fun getCountryListExample(): List<Country> {
+        val gson = Gson()
+        val collectionType = object : TypeToken<List<Country>>() {}.type
+        return gson.fromJson(COUNTRY_EXAMPLE_JSON, collectionType)
+    }
+    const val COUNTRY_EXAMPLE_JSON =
         """
         [
           {

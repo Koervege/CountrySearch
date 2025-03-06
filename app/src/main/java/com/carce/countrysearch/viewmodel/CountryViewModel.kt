@@ -1,11 +1,14 @@
 package com.carce.countrysearch.viewmodel
 
 import android.util.Log
+import androidx.annotation.OpenForTesting
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carce.countrysearch.model.Country
 import com.carce.countrysearch.networkService.RequestState
 import com.carce.countrysearch.repository.CountryRepository
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -50,38 +53,16 @@ class CountryViewModel @Inject constructor(
         initialValue = SearchUiState()
     )
 
-
     init {
         _searchText
-            .debounce(300) // gets the latest; no need for delays!
+            .debounce(300) // gets the latest; no need for delays
             .filter { cityPrefix -> (cityPrefix.length > 1) } // make sure there's enough initial text to search for
             .distinctUntilChanged() // to avoid duplicate network calls
             .flowOn(Dispatchers.IO) // Changes the context where this flow is executed to Dispatchers.IO
-            .onEach { cityPrefix -> // just gets the prefix: 'ph', 'pho', 'phoe'
-                getCountriesByPrefix(cityPrefix)
+            .onEach { countryPrefix ->
+                getCountriesByPrefix(countryPrefix)
             }
             .launchIn(viewModelScope)
-    }
-
-    fun getCountries() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _requestState.value = RequestState.Loading
-            countryRepository.getCountryList()
-                .catch { e ->
-                    _requestState.value = RequestState.Failure(e)
-                    Log.e("Failed to get countries", e.message.orEmpty())
-                }.collect { data ->
-                    _requestState.value = RequestState.Success
-                    _allCountries.value = data
-                    _countriesToBeShown.value = data
-                }
-        }
-    }
-
-    fun updateCountryToBeDetailed(country: Country) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _selectedCountry.value = country
-        }
     }
 
     private fun clearSearch() {
@@ -103,6 +84,21 @@ class CountryViewModel @Inject constructor(
         _selectedCountry.value = country
     }
 
+    fun getCountries() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _requestState.value = RequestState.Loading
+            countryRepository.getCountryList()
+                .catch { e ->
+                    _requestState.value = RequestState.Failure(e)
+                    Log.e("Failed to get countries", e.message.orEmpty())
+                }.collect { data ->
+                    _requestState.value = RequestState.Success
+                    _allCountries.value = data
+                    _countriesToBeShown.value = data
+                }
+        }
+    }
+
     private fun getCountriesByPrefix(prefix: String) {
         viewModelScope.launch(Dispatchers.IO) {
             countryRepository.getCountriesByName(prefix)
@@ -114,7 +110,6 @@ class CountryViewModel @Inject constructor(
                 }
         }
     }
-
 }
 
 data class SearchUiState(

@@ -1,6 +1,6 @@
-package com.carce.countrysearch
+package com.carce.countrysearch.model
 
-import com.carce.countrysearch.model.Country
+import com.carce.countrysearch.TestUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.junit.Test
@@ -12,7 +12,7 @@ class DtoTest {
     @Test
     fun `GIVEN a json WHEN it is a valid country THEN it is parsed correctly`() {
         val collectionType = object : TypeToken<List<Country>>() {}.type
-        val countries = gson.fromJson<List<Country>>(JsonHolder.countryExampleJson, collectionType)
+        val countries = gson.fromJson<List<Country>>(TestUtils.COUNTRY_EXAMPLE_JSON, collectionType)
         assert(countries.size == 1)
         assert(countries[0].flags?.png == "https://flagcdn.com/w320/de.png")
         assert(countries[0].name?.common == "Germany")

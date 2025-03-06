@@ -1,4 +1,4 @@
-package com.carce.countrysearch.view.search.components
+package com.carce.countrysearch.view.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.carce.countrysearch.R
+import com.carce.countrysearch.view.search.components.CountrySearch
 import com.carce.countrysearch.viewmodel.CountryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
