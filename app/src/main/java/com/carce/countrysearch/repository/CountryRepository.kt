@@ -8,7 +8,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class CountryRepository {
+
     fun getCountryList(): Flow<List<Country>> = flow {
         emit(ApiClient.retrofit.getAllCountries())
+    }.flowOn(Dispatchers.IO)
+
+    fun getCountriesByName(name: String): Flow<List<Country>> = flow {
+        emit(ApiClient.retrofit.getCountriesByName(name))
     }.flowOn(Dispatchers.IO)
 }

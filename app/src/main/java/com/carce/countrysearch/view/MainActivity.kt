@@ -1,37 +1,30 @@
 package com.carce.countrysearch.view
 
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.carce.countrysearch.R
 import com.carce.countrysearch.databinding.ActivityMainBinding
+import com.carce.countrysearch.viewmodel.CountryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: CountryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(SystemBarStyle.dark(
+            getColor(R.color.black)
+        ))
         super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        supportActionBar?.hide()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }

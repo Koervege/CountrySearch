@@ -2,10 +2,13 @@
     <string name="app_name">CountrySearch</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Search Fragment</string>
-    <string name="second_fragment_label">Detail Fragment</string>
+    <string name="search_fragment_label">Search Fragment</string>
+    <string name="details_fragment_label">Detail Fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="previous">Countries</string>
+
     <string name="search_results_title">Countries</string>
+    <string name="details_key">%1$s -</string>>
+
 
 </resources>

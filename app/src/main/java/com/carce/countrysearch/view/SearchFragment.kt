@@ -1,55 +1,53 @@
 package com.carce.countrysearch.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.carce.countrysearch.R
 import com.carce.countrysearch.view.components.CountrySearch
 import com.carce.countrysearch.viewmodel.CountryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val viewModel: CountryViewModel by viewModels()
+    private lateinit var viewModel: CountryViewModel
+    private lateinit var rootView: View
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_search, container, false)
+
+        rootView = inflater.inflate(R.layout.fragment_search, container, false)
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner).get()
         viewModel.getCountries()
 
         rootView.findViewById<ComposeView>(R.id.search_compose_view).apply {
             setContent {
-                ConstraintLayout {
-                    val (title, search) = createRefs()
-                    CountrySearch(getString(R.string.search_results_title), Modifier, viewModel)
-                }
+                CountrySearch(getString(R.string.search_results_title), Modifier, viewModel)
             }
         }
-
+        beginCollectingFromVM()
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-       /* binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }*/
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+    private fun beginCollectingFromVM() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.uiState.collect {
+                if (it.selectedCountry != null) findNavController().navigate(R.id.action_SearchFragment_to_DetailFragment)
+            }
+        }
     }
 }

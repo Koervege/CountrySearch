@@ -6,22 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailsFragment">
 
-    <TextView
-        android:id="@+id/textview_second"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/back_icon"
+        android:src="@drawable/ic_back"
+        android:layout_marginTop="@dimen/details_top_margins"
+        android:layout_marginBottom="@dimen/details_top_margins"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="?attr/selectableItemBackground"
+        />
 
-    <Button
-        android:id="@+id/button_second"
+    <TextView
+        android:id="@+id/back_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/navigate_up_color"
+        android:textSize="@dimen/details_list_text_size"
+        app:layout_constraintStart_toEndOf="@id/back_icon"
+        app:layout_constraintTop_toTopOf="@id/back_icon"
+        app:layout_constraintBottom_toBottomOf="@id/back_icon"
+        android:background="?attr/selectableItemBackground"
+        />
+
+    <TextView
+        android:id="@+id/details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/details_list_text_size"
+        app:layout_constraintTop_toTopOf="@id/back_icon"
+        app:layout_constraintBottom_toBottomOf="@id/back_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/details_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/details_padding"
+        android:layout_marginStart="@dimen/details_padding"
+        android:layout_marginTop="@dimen/details_top_margins"
+        android:layout_marginBottom="@dimen/details_top_margins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_icon" />
+
+    <TextView
+        android:id="@+id/details_common_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/details_common_name_size"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/details_padding"
+        android:layout_marginStart="@dimen/details_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_flag" />
+
+    <TextView
+        android:id="@+id/details_official_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/details_list_text_size"
+        android:paddingStart="@dimen/details_padding"
+        android:gravity="bottom"
+        android:paddingBottom="@dimen/details_padding"
+        app:layout_constraintStart_toEndOf="@id/details_common_name"
+        app:layout_constraintTop_toTopOf="@id/details_common_name"
+        app:layout_constraintBottom_toBottomOf="@id/details_common_name"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/details_list_rv"
+        android:paddingBottom="@dimen/details_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_common_name"
+        />
+
+    <ImageView
+        android:id="@+id/details_coat_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/details_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_list_rv" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

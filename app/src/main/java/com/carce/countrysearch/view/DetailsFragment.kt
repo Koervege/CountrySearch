@@ -5,41 +5,77 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import coil3.load
 import com.carce.countrysearch.R
 import com.carce.countrysearch.databinding.FragmentDetailBinding
+import com.carce.countrysearch.model.dto.Country
+import com.carce.countrysearch.viewmodel.CountryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class DetailsFragment : Fragment() {
 
-    private var _binding: FragmentDetailBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var viewModel: CountryViewModel
+    private lateinit var binding: FragmentDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        viewModel = ViewModelProvider(activity as ViewModelStoreOwner).get()
 
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        beginCollectingFromVM()
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            viewModel.navigateBackToSearch()
+            findNavController().navigate(R.id.action_DetailsFragment_to_SearchFragment)
+        }
+
         return binding.root
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+    private fun beginCollectingFromVM() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.uiState.collect {
+                if (it.selectedCountry != null) {
+                    populateScreen(it.selectedCountry)
+                }
+            }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun populateScreen(country: Country) {
+
+        binding.apply {
+            detailsTitle.text = country.name?.common
+
+            detailsFlag.load(country.flags?.png)
+            detailsCommonName.text = country.name?.common
+            detailsOfficialName.text = country.name?.official
+            detailsCoatImage.load(country.coatOfArms?.png)
+
+            detailsListRv.layoutManager = LinearLayoutManager(context)
+            detailsListRv.adapter = DetailsAdapter(country)
+
+            backIcon.setOnClickListener {
+                viewModel.navigateBackToSearch()
+                findNavController().navigate(R.id.action_DetailsFragment_to_SearchFragment)
+            }
+            backText.setOnClickListener {
+                viewModel.navigateBackToSearch()
+                findNavController().navigate(R.id.action_DetailsFragment_to_SearchFragment)
+            }
+
+        }
     }
 }

@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="details_padding">14dp</dimen>
+    <dimen name="details_list_text_size">16sp</dimen>
+    <dimen name="details_common_name_size">27sp</dimen>
+    <dimen name="details_list_value_margins">5dp</dimen>
+    <dimen name="details_top_margins">15dp</dimen>
 </resources>

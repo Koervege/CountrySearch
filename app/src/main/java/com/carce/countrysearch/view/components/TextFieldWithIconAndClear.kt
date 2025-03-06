@@ -1,6 +1,7 @@
 package com.carce.countrysearch.view.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,10 +14,13 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldWithIconAndClear(
+    modifier: Modifier = Modifier,
     leadingIcon: @Composable () -> Unit,
     fieldValue: String = "",
     onChanged: (String) -> Unit,
@@ -32,13 +36,17 @@ fun TextFieldWithIconAndClear(
             Text(
                 text = placeHolderValue,
                 style = MaterialTheme.typography.titleMedium,
-                //color = MaterialTheme.colorScheme.onPrimary.copy(.5f)
             )
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         textStyle = MaterialTheme.typography.titleMedium,
-        colors = textFieldColors()
+        colors = textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
+        shape = RoundedCornerShape(16.dp)
     )
 }
 

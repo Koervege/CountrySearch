@@ -11,7 +11,7 @@ object ApiClient {
     val retrofit: CountryClient by lazy {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(ApiUrls.ALL_COUNTRIES_URL)
+            .baseUrl(ApiUrls.BASE_URL)
             .build().create(CountryClient::class.java)
     }
 }
